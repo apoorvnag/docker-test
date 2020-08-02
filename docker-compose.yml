@@ -8,4 +8,5 @@ services:
       - "8081:80"
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
-      - /Users/apoorv/tech-setup/works/demo:/public_html
+      # - /Users/apoorv/tech-setup/works/demo:/public_html
+      - ${CODE_DIR}:${DEPLOYMENT_DIR}
