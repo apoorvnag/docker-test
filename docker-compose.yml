@@ -1,12 +1,29 @@
 version: "3.0"
 
+networks:
+  backend_apn:
+    driver: bridge
+
 services:
   web:
     build: ./nginx
-    # image: nginx:latest
     ports:
       - "8081:80"
+    depends_on:
+      - php
+    networks:
+      - backend_apn
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
-      # - /Users/apoorv/tech-setup/works/demo:/public_html
+      - ${CODE_DIR}:${DEPLOYMENT_DIR}
+  php:
+    build:
+      context: ./php
+      args:
+        - "DEPLOYMENT_DIR=${DEPLOYMENT_DIR}"
+    expose:
+      - "9000"
+    networks:
+      - backend_apn
+    volumes:
       - ${CODE_DIR}:${DEPLOYMENT_DIR}
