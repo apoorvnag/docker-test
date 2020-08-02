@@ -6,3 +6,6 @@ services:
     # image: nginx:latest
     ports:
       - "8081:80"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - /Users/apoorv/tech-setup/works/demo:/public_html
